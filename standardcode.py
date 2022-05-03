@@ -32,6 +32,12 @@ def load_housing_data(housing_path=HOUSING_PATH):
     return pd.read_csv(csv_path)
 
 
+
+
+def income_cat_proportions(data):
+    return data["income_cat"].value_counts() / len(data)
+  
+
 housing = load_housing_data
 train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
 housing["income_cat"] = pd.cut(
@@ -47,10 +53,6 @@ split = StratifiedShuffleSplit(n_splits=1, test_size=0.2, random_state=42)
 for train_index, test_index in split.split(housing, housing["income_cat"]):
     strat_train_set = housing.loc[train_index]
     strat_test_set = housing.loc[test_index]
-
-
-def income_cat_proportions(data):
-    return data["income_cat"].value_counts() / len(data)
 
 
 train_set, test_set = train_test_split(housing, test_size=0.2, random_state=42)
@@ -85,9 +87,10 @@ housing["bedrooms_per_room"] = (
 housing["population_per_household"] = (
     housing["population"] / housing["households"]
 )
+# drop labels for training set
 housing = strat_train_set.drop(
     "median_house_value", axis=1
-)  # drop labels for training set
+) 
 housing_labels = strat_train_set["median_house_value"].copy()
 
 

@@ -16,5 +16,10 @@ The following techniques have been used:
  - Multiple sampling techinuqies are evaluated. The data set is split into train and test.
  - All the above said modelling techniques are tried and evaluated. The final metric used to evaluate is mean squared error.
 
+## Scripts
+ - ingest_data.py - To download and create training and validation datasets.
+ - train.py       - To train the model.
+ - score.py       - To score the model.
+
 ## To excute the script
 python < scriptname.py >
